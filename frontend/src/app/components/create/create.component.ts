@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router'; 
 import { IssueService } from '../../issue.service';
 
 @Component({
@@ -8,7 +10,22 @@ import { IssueService } from '../../issue.service';
 })
 export class CreateComponent implements OnInit {
 
-  constructor(private issueService: IssueService) { }
+  createForm: FormGroup;
+
+  constructor(private issueService: IssueService, private fb: FormBuilder, private router: Router) {
+    this.createForm = this.fb.group({
+      title: ['', Validators.required],
+      responsible: '',
+      description: '',
+      severity: ''
+    });
+  }
+
+  addIssue(title, responsible, description, severity) {
+    this.issueService.addIssue(title, responsible, description, severity).subscribe(() => {
+      this.router.navigate(['/list']);
+    });
+  }
 
   ngOnInit() {
   }
