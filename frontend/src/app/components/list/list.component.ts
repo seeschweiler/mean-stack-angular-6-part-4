@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 
-import { Issue } from '../../issue.model';
+import { Issue } from '../../issue.module';
 import { IssueService } from '../../issue.service';
 
 @Component({
